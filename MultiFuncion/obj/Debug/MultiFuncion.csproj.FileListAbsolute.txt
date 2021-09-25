@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\bin\Debug\MultiFuncion.dll
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\bin\Debug\MultiFuncion.pdb
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\obj\Debug\MultiFuncion.csprojAssemblyReference.cache
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\obj\Debug\MultiFuncion.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\obj\Debug\MultiFuncion.dll
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\MultiFuncion\obj\Debug\MultiFuncion.pdb

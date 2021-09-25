@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\bin\Debug\Entidades.dll
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\bin\Debug\Entidades.pdb
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\obj\Debug\Entidades.csprojAssemblyReference.cache
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\obj\Debug\Entidades.dll
+C:\Users\User\Desktop\tutorialomar\CRUDclientes\Entidades\obj\Debug\Entidades.pdb
