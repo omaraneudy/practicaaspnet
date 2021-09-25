@@ -76,6 +76,15 @@ namespace Presentacion {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_error;
         
         /// <summary>
+        /// Control txtFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFecha;
+        
+        /// <summary>
         /// Control txtIdFactura.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtIdCliente;
         
         /// <summary>
+        /// Control rfvIdCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIdCliente;
+        
+        /// <summary>
         /// Control fte_codigo_cliente.
         /// </summary>
         /// <remarks>
@@ -119,15 +137,6 @@ namespace Presentacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreCliente;
-        
-        /// <summary>
-        /// Control txtFecha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFecha;
         
         /// <summary>
         /// Control ddlEstado.
@@ -157,15 +166,6 @@ namespace Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtValor;
         
         /// <summary>
-        /// Control lbAgregarProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbAgregarProducto;
-        
-        /// <summary>
         /// Control ddlListaProductos.
         /// </summary>
         /// <remarks>
@@ -175,6 +175,24 @@ namespace Presentacion {
         protected global::System.Web.UI.WebControls.DropDownList ddlListaProductos;
         
         /// <summary>
+        /// Control lbAgregarProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbAgregarProducto;
+        
+        /// <summary>
+        /// Control txtTotalSuperior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalSuperior;
+        
+        /// <summary>
         /// Control gvDetalleVenta.
         /// </summary>
         /// <remarks>
@@ -182,14 +200,5 @@ namespace Presentacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetalleVenta;
-        
-        /// <summary>
-        /// Control txt_total_filas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_total_filas;
     }
 }

@@ -21,7 +21,7 @@ function CalcularTotal(idElemento) {
         //recorrer todos los y sacar valor
     });
 
-    $("[id*=txtSumaTotal]").val(sumaTotal);
+    $("[id*=txtTotalSuperior]").val(sumaTotal);
 }
 
 function ValidarNumero(numero) {

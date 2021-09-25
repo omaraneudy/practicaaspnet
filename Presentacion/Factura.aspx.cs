@@ -32,32 +32,42 @@ namespace Presentacion
 
         protected void txtIdFactura_TextChanged(object sender, EventArgs e)
         {
-            if (txtIdFactura.Text != "" && txtIdFactura.Text != null)
+            try
             {
-                int codigo = convertidor.IntParse(txtIdFactura.Text);
+                if (txtIdFactura.Text != "" && txtIdFactura.Text != null)
+                {
+                    int codigo = convertidor.IntParse(txtIdFactura.Text);
 
-                DataTable dtFactura = new DataTable();
-                DataTable dtDetalle = new DataTable();
-                dtFactura = DFactura.SFactura(codigo);
-                dtDetalle = dre_Factura_Producto.SREFacturaProducto(codigo);
-                LlenarCampos(dtFactura);
-                MostrarBotones(false, true, false, true);
-                LlenarGridDetalle(dtDetalle);
+                    DataTable dtFactura = new DataTable();
+                    DataTable dtDetalle = new DataTable();
+                    dtFactura = DFactura.SFactura(codigo);
+                    dtDetalle = dre_Factura_Producto.SREFacturaProducto(codigo);
+                    LlenarCampos(dtFactura);
+                    MostrarBotones(false, true, false, true);
+                    LlenarGridDetalle(dtDetalle);
+                }
+                else
+                {
+                    DataTable dt = new DataTable();
+                    LimpiarCampos();
+                    LlenarGridDetalle(dt);
+                    MostrarBotones(true, false, false, false);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                DataTable dt = new DataTable();
-                LimpiarCampos();
-                LlenarGridDetalle(dt);
-                MostrarBotones(true, false, false, false);
+                string mensaje = $"alert('No se ha podido consultar la factura debido a {ex}');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), Guid.NewGuid().ToString(), mensaje, true);
             }
         }
 
         protected void lbNuevo_Click(object sender, EventArgs e)
         {
+
             MostrarBotones(false, false, true, true);
             HabilitarCampos(true);
             LimpiarCampos();
+            txtFecha.Text = DateTime.Now.ToShortDateString();
         }
 
         protected void lbCancelar_Click(object sender, EventArgs e)
@@ -77,9 +87,12 @@ namespace Presentacion
                 DataTable dtDetalle = new DataTable();
                 EFactura eFactura = new EFactura();
                 Ere_factura_producto ere_Factura_Producto = new Ere_factura_producto();
-
+                double total = convertidor.DoubleParse(txtTotalSuperior.Text);
                 eFactura.id_factura = convertidor.IntParse(txtIdFactura.Text);
                 eFactura.id_cliente = convertidor.IntParse(txtIdCliente.Text);
+                eFactura.estado = ddlEstado.SelectedValue.ToString();
+                eFactura.valor = total;
+                eFactura.balance = total; 
 
                 if (eFactura.id_factura == 0)
                 {
@@ -130,6 +143,8 @@ namespace Presentacion
                     txtIdCliente.Text = dt.Rows[0]["id_cliente"].ToString();
                     LlenarCliente(convertidor.IntParse(txtIdCliente.Text));
                     txtFecha.Text = dt.Rows[0]["fecha"].ToString();
+                    txtValor.Text = dt.Rows[0]["valor"].ToString();
+                    txtBalance.Text = dt.Rows[0]["balance"].ToString();
                 }
             }
             catch (Exception ex)
@@ -154,73 +169,60 @@ namespace Presentacion
                 txtTotal.Text = dRow["total"].ToString();
             }
         }
-        private void LlenarGridProducto()
-        {
-            int codigo = convertidor.IntParse(txtIdFactura.Text);
-            try
-            {
-                if (codigo > 0)
-                {
-                    DataTable dt = new DataTable();
-                    dt = dre_Factura_Producto.SREFacturaProducto(codigo);
-                    gvDetalleVenta.DataSource = dt;
-                    gvDetalleVenta.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
 
-            }
-        }
 
         private void LlenarFooterGrid()
         {
-            TextBox txtSumaTotal = new TextBox();
-            gvDetalleVenta.FooterRow.Cells[3].Text = "Total";
-            txtSumaTotal.ID = "txtSumaTotal";
-            txtSumaTotal.ClientIDMode = ClientIDMode.Predictable;
-            txtSumaTotal.Enabled = false;
-            txtSumaTotal.CssClass = "form-control input-sm";
-            gvDetalleVenta.FooterRow.Cells[4].Controls.Add(txtSumaTotal);
-            txtSumaTotal = gvDetalleVenta.FindControl("txtSumaTotal") as TextBox;
+            //TextBox txtSumaTotal = new TextBox();
+            //gvDetalleVenta.FooterRow.Cells[3].Text = "Total";
+            //txtSumaTotal.ID = "txtSumaTotal";
+            //txtSumaTotal.ClientIDMode = ClientIDMode.Predictable;
+            //txtSumaTotal.Enabled = false;
+            //txtSumaTotal.CssClass = "form-control input-sm";
+            //gvDetalleVenta.FooterRow.Cells[4].Controls.Add(txtSumaTotal);
+            //txtSumaTotal = gvDetalleVenta.FindControl("txtSumaTotal") as TextBox;
         }
 
-        private void SumaTotal()
-        {
-            double sumaTotal = 0;
-            double apoyo = 0;
-            TextBox txtTotal = new TextBox();
-            TextBox txtSumaTotal = new TextBox();
+        //private void SumaTotal()
+        //{
+        //    double sumaTotal = 0;
+        //    double apoyo = 0;
+        //    TextBox txtTotal = new TextBox();
+        //    TextBox txtSumaTotal = new TextBox();
 
-            for (int i = 0; i < gvDetalleVenta.Rows.Count; i++)
-            {
-                txtTotal = gvDetalleVenta.Rows[i].FindControl("txtTotal") as TextBox;
-                apoyo = convertidor.DoubleParse(txtTotal.Text);
-                sumaTotal += apoyo;
-            }
-            txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
-            txtSumaTotal.Text = sumaTotal.ToString();
-        }
+        //    for (int i = 0; i < gvDetalleVenta.Rows.Count; i++)
+        //    {
+        //        txtTotal = gvDetalleVenta.Rows[i].FindControl("txtTotal") as TextBox;
+        //        apoyo = convertidor.DoubleParse(txtTotal.Text);
+        //        sumaTotal += apoyo;
+        //    }
+        //    txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
+        //    txtSumaTotal.Text = sumaTotal.ToString();
+        //}
 
         private void LlenarGridDetalle(DataTable dt)
         {
             try
             {
-                TextBox txtCantidad = new TextBox();
-                txtCantidad = gvDetalleVenta.FindControl("txtCantidad") as TextBox;
+                //TextBox txtCantidad = new TextBox();
+                //txtCantidad = gvDetalleVenta.FindControl("txtCantidad") as TextBox;
                 //int cantidad = 1;
                 gvDetalleVenta.DataSource = dt;
                 gvDetalleVenta.DataBind();
 
                 double suma = convertidor.DoubleParse(dt.Compute("sum(total)", ""));
-                LlenarFooterGrid();
-                TextBox txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
-                txtSumaTotal.Text = suma.ToString();
-                SumaTotal();
+                //LlenarFooterGrid();
+                //TextBox txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
+                //txtSumaTotal.Text = suma.ToString();
+
+                txtTotalSuperior.Text = suma.ToString();
+
+
+                //SumaTotal();
             }
             catch (Exception ex)
             {
-                string mensaje = $"alert('Error debido a {ex}')";
+                string mensaje = $"alert('No se ha podido traer los detalles a la tabla debido a {ex}')";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), mensaje, Guid.NewGuid().ToString(), true);
             }
         }
@@ -265,18 +267,9 @@ namespace Presentacion
                 txtIdCliente.Enabled = estado;
                 //txtValor.Enabled = estado;
                 //txtNombreCliente.Enabled = estado;
-                if (estado)
-                {
-                    txtFecha.Text = DateTime.Now.ToShortDateString();
-                }
-                else
-                {
-                    txtFecha.Text = "";
-                }
                 gvDetalleVenta.Enabled = estado;
                 ddlListaProductos.Enabled = estado;
                 lbAgregarProducto.Enabled = estado;
-                //txtPrecio.Enabled = estado;
             }
             catch (Exception ex)
             {
@@ -296,6 +289,9 @@ namespace Presentacion
             txtIdCliente.Text = "";
             txtNombreCliente.Text = "";
             txtFecha.Text = "";
+            txtBalance.Text = "";
+            txtValor.Text = "";
+            txtTotalSuperior.Text = "";
         }
 
         private void LlenarCliente(int codigo)
@@ -372,7 +368,7 @@ namespace Presentacion
                 }
 
                 LlenarGridDetalle(dtDetalle);
-                SumaTotal();
+                //SumaTotal();
 
             }
             catch (Exception ex)
