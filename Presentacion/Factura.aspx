@@ -21,6 +21,8 @@
                             CausesValidation="true" Visible="false">Grabar</asp:LinkButton>
                         <asp:LinkButton ID="lbCancelar" runat="server" CssClass="btn btn-primary" OnClick="lbCancelar_Click"
                             CausesValidation="false" Visible="false">Cancelar</asp:LinkButton>
+                        <asp:LinkButton ID="lbAnular" runat="server" CssClass="btn btn-primary" OnClick="lbAnular_Click"
+                            CausesValidation="false" Visible="false">Anular</asp:LinkButton>
                     </div>
                     <div class="well">
                         <div class="panel panel-primary">
@@ -141,8 +143,7 @@
                                             EmptyDataText="No hay datos para mostrar" AutoGenerateColumns="false"
                                             CssClass="table table-striped table-bordered table-hover" Enabled="false"
                                             DataKeyNames="id_re_factura_producto, id_factura, id_producto, nombre_producto"
-                                            OnRowDataBound="gvDetalleVenta_RowDataBound" OnSelectedIndexChanged="gvDetalleVenta_SelectedIndexChanged"
-                                            OnRowDeleting="gvDetalleVenta_RowDeleting">
+                                            OnRowDataBound="gvDetalleVenta_RowDataBound" OnSelectedIndexChanged="gvDetalleVenta_SelectedIndexChanged">
                                             <Columns>
                                                 <asp:BoundField HeaderText="Código" DataField="id_producto" HeaderStyle-Width="5" />
                                                 <asp:BoundField HeaderText="Descripción" HeaderStyle-Width="15" DataField="nombre_producto" />

@@ -13,16 +13,13 @@ namespace Presentacion
 {
     public partial class Factura : System.Web.UI.Page
     {
-
         Convertidor convertidor = new Convertidor();
         DFactura DFactura = new DFactura();
         DProducto dProducto = new DProducto();
         Dre_factura_producto dre_Factura_Producto = new Dre_factura_producto();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 LlenarListaProducto();
@@ -63,7 +60,6 @@ namespace Presentacion
 
         protected void lbNuevo_Click(object sender, EventArgs e)
         {
-
             MostrarBotones(false, false, true, true);
             HabilitarCampos(true);
             LimpiarCampos();
@@ -72,7 +68,6 @@ namespace Presentacion
 
         protected void lbCancelar_Click(object sender, EventArgs e)
         {
-
             HabilitarCampos(false);
             LimpiarCampos();
             MostrarBotones(true, false, false, false);
@@ -116,7 +111,10 @@ namespace Presentacion
                     string mensaje = "alert('¡La factura se ha actualizado correctamente!');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), Guid.NewGuid().ToString(), mensaje, true);
                 }
-
+                int codigo = convertidor.IntParse(txtIdFactura.Text);
+                DataTable dtLlenar = new DataTable();
+                dtLlenar = DFactura.SFactura(codigo);
+                LlenarCampos(dtLlenar);
                 MostrarBotones(false, true, false, true);
                 HabilitarCampos(false);
             }
@@ -442,8 +440,6 @@ namespace Presentacion
             }
         }
 
-        protected void gvDetalleVenta_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-        }
+
     }
 }
