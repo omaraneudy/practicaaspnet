@@ -16,6 +16,7 @@
                     <asp:LinkButton ID="lbGrabar" runat="server" CssClass="btn btn-primary" Visible="false" OnClick="lbGrabar_Click">Grabar </asp:LinkButton>
                     <asp:LinkButton ID="lbCancelar" runat="server" CssClass="btn btn-primary" Visible="false" OnClick="lbCancelar_Click" CausesValidation="false">Cancelar</asp:LinkButton>
                     <asp:LinkButton ID="lbEliminar" runat="server" CssClass="btn btn-primary" Visible="false" OnClick="lbEliminar_Click" CausesValidation="false">Eliminar</asp:LinkButton>
+                    <asp:LinkButton ID="lbReporteProducto" runat="server" CssClass="btn btn-primary" Visible="true" OnClick="lbReporteProducto_Click" CausesValidation="false">Reporte</asp:LinkButton>
 
                 </div>
                 <div class="well">

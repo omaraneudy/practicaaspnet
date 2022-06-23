@@ -40,7 +40,7 @@ namespace Presentacion
                     dtFactura = DFactura.SFactura(codigo);
                     dtDetalle = dre_Factura_Producto.SREFacturaProducto(codigo);
                     LlenarCampos(dtFactura);
-                    MostrarBotones(false, true, false, true);
+                    MostrarBotones(false, true, false, true, true);
                     LlenarGridDetalle(dtDetalle);
                 }
                 else
@@ -48,7 +48,7 @@ namespace Presentacion
                     DataTable dt = new DataTable();
                     LimpiarCampos();
                     LlenarGridDetalle(dt);
-                    MostrarBotones(true, false, false, false);
+                    MostrarBotones(true, false, false, false, false);
                 }
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Presentacion
 
         protected void lbNuevo_Click(object sender, EventArgs e)
         {
-            MostrarBotones(false, false, true, true);
+            MostrarBotones(false, false, true, true, false);
             HabilitarCampos(true);
             LimpiarCampos();
             txtFecha.Text = DateTime.Now.ToShortDateString();
@@ -70,7 +70,7 @@ namespace Presentacion
         {
             HabilitarCampos(false);
             LimpiarCampos();
-            MostrarBotones(true, false, false, false);
+            MostrarBotones(true, false, false, false,false);
             DataTable dt = new DataTable();
             LlenarGridDetalle(dt);
         }
@@ -85,9 +85,9 @@ namespace Presentacion
                 double total = convertidor.DoubleParse(txtTotalSuperior.Text);
                 eFactura.id_factura = convertidor.IntParse(txtIdFactura.Text);
                 eFactura.id_cliente = convertidor.IntParse(txtIdCliente.Text);
-                eFactura.estado = ddlEstado.SelectedValue.ToString();
+                //eFactura.estado = ddlEstado.SelectedValue.ToString();
                 eFactura.valor = total;
-                eFactura.balance = total; 
+                eFactura.balance = total;
 
                 if (eFactura.id_factura == 0)
                 {
@@ -115,7 +115,7 @@ namespace Presentacion
                 DataTable dtLlenar = new DataTable();
                 dtLlenar = DFactura.SFactura(codigo);
                 LlenarCampos(dtLlenar);
-                MostrarBotones(false, true, false, true);
+                MostrarBotones(false, true, false, true, true);
                 HabilitarCampos(false);
             }
             catch (Exception ex)
@@ -127,7 +127,7 @@ namespace Presentacion
 
         protected void lbModificar_Click(object sender, EventArgs e)
         {
-            MostrarBotones(false, false, true, true);
+            MostrarBotones(false, false, true, true, true);
             HabilitarCampos(true);
         }
 
@@ -168,55 +168,14 @@ namespace Presentacion
             }
         }
 
-
-        private void LlenarFooterGrid()
-        {
-            //TextBox txtSumaTotal = new TextBox();
-            //gvDetalleVenta.FooterRow.Cells[3].Text = "Total";
-            //txtSumaTotal.ID = "txtSumaTotal";
-            //txtSumaTotal.ClientIDMode = ClientIDMode.Predictable;
-            //txtSumaTotal.Enabled = false;
-            //txtSumaTotal.CssClass = "form-control input-sm";
-            //gvDetalleVenta.FooterRow.Cells[4].Controls.Add(txtSumaTotal);
-            //txtSumaTotal = gvDetalleVenta.FindControl("txtSumaTotal") as TextBox;
-        }
-
-        //private void SumaTotal()
-        //{
-        //    double sumaTotal = 0;
-        //    double apoyo = 0;
-        //    TextBox txtTotal = new TextBox();
-        //    TextBox txtSumaTotal = new TextBox();
-
-        //    for (int i = 0; i < gvDetalleVenta.Rows.Count; i++)
-        //    {
-        //        txtTotal = gvDetalleVenta.Rows[i].FindControl("txtTotal") as TextBox;
-        //        apoyo = convertidor.DoubleParse(txtTotal.Text);
-        //        sumaTotal += apoyo;
-        //    }
-        //    txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
-        //    txtSumaTotal.Text = sumaTotal.ToString();
-        //}
-
         private void LlenarGridDetalle(DataTable dt)
         {
             try
             {
-                //TextBox txtCantidad = new TextBox();
-                //txtCantidad = gvDetalleVenta.FindControl("txtCantidad") as TextBox;
-                //int cantidad = 1;
                 gvDetalleVenta.DataSource = dt;
                 gvDetalleVenta.DataBind();
-
                 double suma = convertidor.DoubleParse(dt.Compute("sum(total)", ""));
-                //LlenarFooterGrid();
-                //TextBox txtSumaTotal = gvDetalleVenta.FooterRow.FindControl("txtSumaTotal") as TextBox;
-                //txtSumaTotal.Text = suma.ToString();
-
                 txtTotalSuperior.Text = suma.ToString();
-
-
-                //SumaTotal();
             }
             catch (Exception ex)
             {
@@ -241,7 +200,7 @@ namespace Presentacion
             }
         }
 
-        private void MostrarBotones(bool nuevo, bool modificar, bool grabar, bool cancelar)
+        private void MostrarBotones(bool nuevo, bool modificar, bool grabar, bool cancelar, bool anular)
         {
             try
             {
@@ -249,6 +208,7 @@ namespace Presentacion
                 lbModificar.Visible = modificar;
                 lbGrabar.Visible = grabar;
                 lbCancelar.Visible = cancelar;
+                lbAnular.Visible = anular;
             }
             catch (Exception ex)
             {
@@ -440,6 +400,11 @@ namespace Presentacion
             }
         }
 
-
+        protected void lbAnular_Click(object sender, EventArgs e)
+        {
+            EFactura eFactura = new EFactura();
+            eFactura.estado = "I";
+            DFactura.UFactura(eFactura);
+        }
     }
 }

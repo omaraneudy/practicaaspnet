@@ -62,5 +62,25 @@ namespace Datos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void UAnularFactura(int codigo)
+        {
+            EFactura eFactura = new EFactura();
+            using (con.Abrir())
+            {
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "UAnularFactura";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = con.Abrir();
+                cmd.Parameters.Add("@prm_id_cliente", MySqlDbType.Int32).Value = eFactura.id_cliente;
+                cmd.Parameters.Add("@prm_id_factura", MySqlDbType.Int32).Value = eFactura.id_factura;
+                cmd.Parameters.Add("@prm_fecha", MySqlDbType.DateTime).Value = eFactura.fecha;
+                cmd.Parameters.Add("@prm_estado", MySqlDbType.VarChar).Value = eFactura.estado;
+                cmd.Parameters.Add("@prm_valor", MySqlDbType.Double).Value = eFactura.valor;
+                cmd.Parameters.Add("@prm_balance", MySqlDbType.Double).Value = eFactura.balance;
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

@@ -348,5 +348,10 @@ namespace Presentacion
                 div_error.Visible = !div_error.Visible;
             }
         }
+
+        protected void lbReporteProducto_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("reporte/Rproductos.aspx");
+        }
     }
 }
